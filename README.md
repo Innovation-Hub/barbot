@@ -49,6 +49,16 @@ To create new recipe, you just need to add a new file in the recipes folder base
 }
 ```
 
+RoadMap
+--------
+* Creation of a web front with angularjs/Bootstrap to order drink with style
+* Mobile client
+* user profiling to manage the consommation or each user
+* facial recognition with openCV
+* Breathalyzer to detect alcohol level
+* 3D printed peristaltic pump to reduce cost
+* payment of drink with bitcoin/litecoin/[tekcoin](http://www.tekcoin.io)
+
 Hardware
 --------
 * Intel [Galileo](http://www.intel.com/content/www/us/en/intelligent-systems/galileo/galileo-overview.html)
