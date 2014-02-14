@@ -1,0 +1,20 @@
+{
+  "name": "BarBot",
+  "version": "0.0.1",
+  "description": "Automatic bar controlled by web API",
+  "main": "web.js",
+  "dependencies": {
+    "async": "~0.2.10",
+    "express": "~3.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Innovation-Hub/barbot.git"
+  },
+  "author": "Hub Innovation from Epitech",
+  "license": "MIT"
+}

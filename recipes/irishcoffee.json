@@ -1,0 +1,8 @@
+{
+	"name": "Irish Coffee",
+	"api": "irishcoffee",
+	"ingredients": [
+	{"index": 7, "time": 5000},
+	{"index": 8, "time": 2000}
+	]
+}
