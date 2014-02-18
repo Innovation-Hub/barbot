@@ -10,7 +10,6 @@ var server = require('http').createServer(app, { log: false })
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.compress());
-//app.use(express.static(__dirname + '/public'));
 
 var recipes = [];
 
@@ -38,7 +37,7 @@ fs.readdir('./recipes/', function (err, files) {
 			    } else {
 				var r = JSON.parse(data);
 				recipes.push(r);
-				console.log('/api/' + r.api);
+				console.log('cocktail ' + r.name + ' added');
 				app.post('/api/' + r.api, function (req, res) {
 					prepareDrink(r.ingredients, function (err) {
 						res.send('ok');
@@ -49,10 +48,6 @@ fs.readdir('./recipes/', function (err, files) {
 		};
 	    });
     });
-
-app.post('/api/custom', function (req, res) {
-	res.send({msg: 'Your drink will be ready in few seconds!'});
-});
 
 app.get('/api/recipes', function (req,res) {
 	var re = [];
