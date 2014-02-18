@@ -10,6 +10,7 @@ var server = require('http').createServer(app, { log: false })
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.compress());
+app.use(express.static(__dirname + '/public'));
 
 var recipes = [];
 
@@ -53,7 +54,6 @@ app.get('/api/recipes', function (req,res) {
 	var re = [];
 	
 	recipes.forEach(function (r) {
-		console.log(r);
 		re.push({name: r.name, endpoint: '/api/' + r.api});
 	    });
 	res.send(re);
