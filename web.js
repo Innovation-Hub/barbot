@@ -1,7 +1,7 @@
 var fs = require('fs');
 var async = require('async');
 
-var bar = require('./gpio-galileo-helper');
+var bar = require('./pump-controller');
 
 var port = 4242;
 var express = require('express');

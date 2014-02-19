@@ -22,8 +22,8 @@ var PumpController = function()
      */
     this.pump =
     {
-        7:  7,
-        8:  8
+        1:  7,
+        2:  8
     };
     /**
      * Pump states helper
@@ -58,7 +58,7 @@ PumpController.prototype.drainIndex = function(pump_index, delay, callback)
     galil.setPinDirection(this.pump[pump_index], "out");
     galil.setPinPortDrive(this.pump[pump_index], "strong");
     galil.writePin(this.pump[pump_index], this.state['ON']);
-    console.log('PIN' + this.pump[pump_index] + ': ON.');
+    console.log('PIN' + this.pump[pump_index] + ': ON for ' + delay + 'ms.');
 
     setTimeout(function()
     {
@@ -87,7 +87,7 @@ PumpController.prototype.drainIndexSync = function(pump_index, delay, callback)
     galil.setPinDirection(this.pump[pump_index], "out");
     galil.setPinPortDrive(this.pump[pump_index], "strong");
     galil.writePin(this.pump[pump_index], this.state['ON']);
-    console.log('PIN' + this.pump[pump_index] + ': ON.');
+    console.log('PIN' + this.pump[pump_index] + ': ON for ' + delay + 'ms.');
 
     setTimeout(function()
     {

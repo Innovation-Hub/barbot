@@ -20,6 +20,7 @@ var GalileoGpio = function()
      * @property pin
      * @type Object
      */
+    //TODO: Complete pin list
     this.pin =
     {
         3: "18",
