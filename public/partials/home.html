@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1><span class="glyphicon glyphicon-glass"></span>Home <small>The place where you can order nice drinks</small></h1>
+</div>
+
+<div class="jumbotron">
+	<strong>{{info}}</strong>
+		<div ng-repeat="recipe in recipes">
+		<div class="panel panel-default">
+		  <div class="panel-heading">{{recipe.name}}</div>
+		  <div class="panel-body">
+			{{recipe.name}} need a description on the recipe file
+		  </div>
+		  <div class="panel-footer">
+			<a class="btn btn-primary btn-sm" ng-disabled="isBusy" ng-click="order(recipe)" role="button">Order</a>
+		  </div>		  
+</div>
