@@ -1,7 +1,7 @@
 var fs = require('fs');
 var async = require('async');
 
-// Load the natif controller to manipule pumps
+// Load the native controller to manipule pumps
 var bar = require('./pump-controller');
 
 var port = 4242;
