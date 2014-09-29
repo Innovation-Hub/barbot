@@ -1,0 +1,13 @@
+{
+	"name": "Lighter Violet",
+	"api": "lighter_violet",
+	"ingredients":
+    [
+        {
+            "index": 1, "time": 19000
+        },
+        {
+            "index": 2, "time": 1000
+        }
+	]
+}

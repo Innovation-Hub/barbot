@@ -22,8 +22,12 @@ var PumpController = function()
      */
     this.pump =
     {
-        1:  7,
-        2:  8
+        1:  2,
+        2:  4,
+        3:  7,
+        4:  8,
+        5:  12,
+        6:  13
     };
     /**
      * Pump states helper

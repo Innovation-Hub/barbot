@@ -1,0 +1,25 @@
+{
+    "name": "All Pumps",
+    "api": "all",
+    "ingredients":
+        [
+            {
+                "index": 1, "time": 5000
+            },
+            {
+                "index": 2, "time": 6000
+            },
+            {
+                "index": 3, "time": 7000
+            },
+            {
+                "index": 4, "time": 8000
+            },
+            {
+                "index": 5, "time": 9000
+            },
+            {
+                "index": 6, "time": 10000
+            }
+        ]
+}

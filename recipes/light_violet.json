@@ -1,0 +1,13 @@
+{
+	"name": "Light Violet",
+	"api": "light_violet",
+	"ingredients":
+    [
+        {
+            "index": 1, "time": 15000
+        },
+        {
+            "index": 2, "time": 5000
+        }
+	]
+}

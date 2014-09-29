@@ -1,0 +1,13 @@
+{
+	"name": "Darker Violet",
+	"api": "darker_violet",
+	"ingredients":
+    [
+        {
+            "index": 1, "time": 1000
+        },
+        {
+            "index": 2, "time": 19000
+        }
+	]
+}
