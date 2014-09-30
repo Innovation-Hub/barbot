@@ -5,9 +5,10 @@ def closePin(pinNo, gpioType):
     ''' close pin the way it needs to be closed depending on type '''
     path = "/sys/class/"
     path += "pwm/pwmchip0/unexport" if gpioType == "PWM" else "gpio/unexport"
-    if os.path.isfile("/sys/class/gpio/gpio" + pinNo):
-        os.system("echo " + pinNo + " > " + path)
-        if not os.path.isfile("/sys/class/gpio/gpio" + pinNo):
+    print path
+    if os.path.exists("/sys/class/gpio/gpio" + str(pinNo)):
+        os.system("echo " + str(pinNo) + " > " + path)
+        if not os.path.exists("/sys/class/gpio/gpio" + str(pinNo)):
             return True
     else:
         return False
@@ -26,7 +27,7 @@ def main():
         if closePin(pinNo, pinType):
             print "ok - closed " + pinType + " : " + str(pinNo)
         else:
-            print "Err! STILL OPEN " + pinType + " : " + str(pinNo)
+            print "Err! ALREADY CLOSED " + pinType + " : " + str(pinNo)
 
 
 if __name__ == "__main__":
