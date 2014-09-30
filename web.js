@@ -20,9 +20,9 @@ String.prototype.endsWith = function(suffix) {
 };
 
 var prepareDrink = function(ingredients, cb) {
-    mq3.getAverageValue(500, 10, function(higher_value)
+    mq3.getAverageValue(500, 10, function(avg_value)
     {
-        console.log('[CB_HIGHER] ' + higher_value);
+        console.log('[CB_AVG] ' + avg_value);
 
         async.eachSeries(ingredients, function (i, cb) {
             bar.drainIndex(i.index, i.time, function () {

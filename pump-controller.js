@@ -41,6 +41,12 @@ var PumpController = function()
     };
 };
 
+/**
+ * Sets the map that determines the match between pump ids and ios
+ *
+ * @method setPumpMap
+ * @param {Object} pump_map Map where pump ids match io ids.
+ */
 PumpController.prototype.setPumpMap = function(pump_map)
 {
     this.pump = pump_map;
