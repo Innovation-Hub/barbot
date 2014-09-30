@@ -67,3 +67,25 @@ app.get('/api/recipes', function (req,res) {
 
 server.listen(process.env.PORT || port);
 console.log('server started on port ' + (process.env.PORT || port));
+
+app.get('/api/purge', function()
+{
+	console.log('Entering purge');
+	bar.purge();
+});
+
+app.get('/api/emergency', function()
+	{
+		console.log('Entering Emergency Stop');
+		bar.emergencyStop();
+	});
+
+app.get('/api/drunk', function(req,res)
+{
+	mq3.getAverageValue(500, 10, function(avg_value)
+    {
+        console.log('[CB_AVG] ' + avg_value);
+        res.send(avg_value);
+
+    });
+});
