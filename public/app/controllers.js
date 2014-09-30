@@ -11,56 +11,42 @@ function HomeCtrl($scope, $routeParams, $http)
 		$scope.recipes = data;
 	});
 
-	/*document.getElementById("purgeBtn").onclick = function()
-	{
-		$http.get('api/purge').success();
-	};*/
-
 	$scope.purge = function ()
 	{
-		$http.get('api/purge').success();
-	}
-
-	/*document.getElementById("emergencyBtn").onclick = function()
-    {
-    	$http.get('api/emergency').success();
-    };*/
+		$http.post('api/purge').success();
+	};
 
     $scope.emergency = function ()
 	{
-		$http.get('api/emergency').success();
-	}
-
-    /*document.getElementById("drunkBtn").onclick = function()
-    {
-    	$http.get('api/drunk').success();
-    };*/
+		$http.post('api/emergency').success();
+	};
 
 	$scope.drunk = function ()
 	{
 		$http.get('api/drunk').success(function(data, status)
 			{
 				console.log(data.drunk);
-				if (data.drunk < 400)
+				if (data.drunk < 800)
 				{
-					$scope.alcohol = "Nah, you're clean";
+					$scope.alcohol = "Nah, you're clean.";
 				}
-				else if(data.drunk >= 400 && data.drunk <= 1000)
+				else if(data.drunk >= 800 && data.drunk <= 1500)
 				{
-					$scope.alcohol = "Just a little";
+                    // Green + Blue
+					$scope.alcohol = "Just a little...";
 				}
-				else if (data.drunk > 1000 && data.drunk <= 2500)
+				else if (data.drunk > 1500 && data.drunk <= 3000)
 				{
+                    // Green + Red
 					$scope.alcohol = "Drunk ;)";
 				}
-				else if (data.drunk > 2500)
+				else if (data.drunk > 3000)
 				{
-					$scope.alcohol = "Almost dead";
+                    // Red
+					$scope.alcohol = "Almost dead !";
 				}
-
-
 			});
-	}
+	};
 
 	$scope.order = function (recipe)
     {

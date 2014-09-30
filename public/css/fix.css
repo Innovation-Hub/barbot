@@ -72,6 +72,8 @@ html, body
     color: #FFF;
     background-color: #228B22;
     border-color: #008000;
+    /*margin-left: 1450px;
+    margin-top: -70px;*/
     font-size: 100%;
 }
 
@@ -80,5 +82,7 @@ html, body
     color: #FFF;
     background-color: #FF4500;
     border-color: #FF0000;
+    /*margin-left: 1600px;
+    margin-top: -113px;*/
     font-size: 100%;
 }

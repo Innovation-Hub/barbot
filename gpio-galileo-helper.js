@@ -84,7 +84,10 @@ GalileoGpio.prototype.openGPIO = function()
 GalileoGpio.prototype.openPin = function(pin_number)
 {
     //TODO: use rough GPIO method once available
-    fs.writeFileSync(this.gpioPath + "/export", this.pin[pin_number].id);
+    if (!fs.existsSync(this.gpioPath + "/gpio" + this.pin[pin_number].id))
+    {
+        fs.writeFileSync(this.gpioPath + "/export", this.pin[pin_number].id);
+    }
 };
 
 /**
@@ -167,7 +170,10 @@ GalileoGpio.prototype.readDigitalPin = function(pin_number)
  */
 GalileoGpio.prototype.closePin = function(pin_number)
 {
-    fs.writeFileSync(this.gpioPath + "/unexport", this.pin[pin_number].id);
+    if (fs.existsSync(this.gpioPath + "/gpio" + this.pin[pin_number].id))
+    {
+        fs.writeFileSync(this.gpioPath + "/unexport", this.pin[pin_number].id);
+    }
 };
 
 /**

@@ -110,4 +110,44 @@ PumpController.prototype.drainIndexSync = function(pump_index, delay, callback)
     }, delay);
 };
 
+PumpController.prototype.purgeIndex = function(pump_index)
+{
+    galil.openPin(this.pump[pump_index]);
+    galil.setPinDirection(this.pump[pump_index], "out");
+    galil.setPinPortDrive(this.pump[pump_index], "strong");
+    galil.writePin(this.pump[pump_index], this.state['ON']);
+    galil.closePin(this.pump[pump_index]);
+};
+
+PumpController.prototype.stopIndex = function(pump_index)
+{
+    galil.openPin(this.pump[pump_index]);
+    galil.setPinDirection(this.pump[pump_index], "out");
+    galil.setPinPortDrive(this.pump[pump_index], "strong");
+    galil.writePin(this.pump[pump_index], this.state['OFF']);
+    galil.closePin(this.pump[pump_index]);
+};
+
+PumpController.prototype.purgeAll = function()
+{
+    for (var index in this.pump)
+    {
+        if (this.pump.hasOwnProperty(index))
+        {
+            this.purgeIndex(index);
+        }
+    }
+};
+
+PumpController.prototype.stopAll = function()
+{
+    for (var index in this.pump)
+    {
+        if (this.pump.hasOwnProperty(index))
+        {
+            this.stopIndex(index);
+        }
+    }
+};
+
 module.exports = new PumpController;

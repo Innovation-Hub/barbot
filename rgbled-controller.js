@@ -38,6 +38,8 @@ var RgbledController = function()
         'g' : 0,
         'b' : 0
     };
+
+    this.blink_interval = -1;
 };
 
 /**
@@ -45,15 +47,19 @@ var RgbledController = function()
  *
  * @method turnOff
  */
-RgbledController.prototype.turnOff = function()
+RgbledController.prototype.turnOff = function(force)
 {
+    console.log('[RGB] turning off');
+    if (typeof(force) === true && this.blink_interval != -1)
+    {
+        clearInterval(this.blink_interval);
+        this.blink_interval = -1;
+    }
     for (var index in this.pin)
     {
         if (this.pin.hasOwnProperty(index))
         {
             var color = index.toString();
-
-            console.log('[RGB] turning off');
             galil.openPin(this.pin[color]);
             galil.setPinDirection(this.pin[color], "out");
             galil.setPinPortDrive(this.pin[color], "strong");
@@ -67,34 +73,72 @@ RgbledController.prototype.turnOff = function()
  * Helper : Sets the r, g, and b values for the led
  *
  * @method setRgbValues
- * @param {Array} rgb Values are either 0 or 1
+ * @param {Object} rgb Values are either 0 or 1
  */
 // TODO: use pwm to set all sorts of colors, and modulate it smoother
-RgbledController.prototype.setRgbValue = function(rgb)
+RgbledController.prototype.setRgbValue = function(rgb, force)
 {
     var that = this;
 
+    if (force === true && this.blink_interval != -1)
+    {
+        clearInterval(this.blink_interval);
+        this.blink_interval = -1;
+    }
+    console.log('[RGB] setting to ' + rgb['r'] + ', ' + rgb['g'] + ', ' + rgb['b']);
     for (var index in this.pin)
     {
         if (this.pin.hasOwnProperty(index))
         {
-            var color = index.toString();
-
-            console.log('[RGB] setting ' + color + ' to ' + rgb[color]);
-            galil.openPin(this.pin[color]);
-            galil.setPinDirection(this.pin[color], "out");
-            galil.setPinPortDrive(this.pin[color], "strong");
-            if (rgb[color] == 1)
+            galil.openPin(this.pin[index]);
+            galil.setPinDirection(this.pin[index], "out");
+            galil.setPinPortDrive(this.pin[index], "strong");
+            if (rgb[index] == 1)
             {
-                galil.writePin(this.pin[color], "1");
+                galil.writePin(this.pin[index], "1");
             }
             else
             {
-                galil.writePin(this.pin[color], "0");
+                galil.writePin(this.pin[index], "0");
             }
-            galil.closePin(that.pin[color]);
+            galil.closePin(that.pin[index]);
         }
     }
+};
+
+RgbledController.prototype.setRgbValueTimer = function(rgb, timer, force)
+{
+    var that = this;
+
+    this.setRgbValue(rgb, force);
+    setTimeout(function()
+    {
+        that.turnOff();
+    }, timer);
+};
+
+RgbledController.prototype.blinkColor = function(rgb, interval, count)
+{
+    var that = this;
+    var timer = 0;
+    count = typeof count !== 'undefined' ? count : -1;
+
+    this.blink_interval = setInterval(function()
+    {
+        if (timer % 2 == 0)
+        {
+            that.setRgbValue(rgb);
+        }
+        else
+        {
+            that.turnOff();
+        }
+        timer++;
+        if (count != -1 && timer > count && that.blink_interval != -1)
+        {
+            that.turnOff(true);
+        }
+    }, interval);
 };
 
 module.exports = new RgbledController;

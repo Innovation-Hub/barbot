@@ -78,7 +78,7 @@ Mq3Controller.prototype.getAverageValue = function(interval, count, callback)
         {
             clearInterval(int_id);
             galil.closePin(that.pin);
-            average_value = average_value / count;
+            average_value = average_value / (count + 1);
             console.log('[MQ3] Measurement done');
             callback(average_value);
         }
@@ -86,7 +86,7 @@ Mq3Controller.prototype.getAverageValue = function(interval, count, callback)
 };
 
 /**
- * Helper : Gets the average measure value over time
+ * Helper : Gets the higher measure value over time
  *
  * @method getHigherValue
  * @param {Number} interval A measure is done every interval (ms)
@@ -94,6 +94,42 @@ Mq3Controller.prototype.getAverageValue = function(interval, count, callback)
  * @param {Function} [callback] Callback. Higher value is passed to it.
  */
 Mq3Controller.prototype.getHigherValue = function(interval, count, callback)
+{
+    var that = this;
+    var higher_value = 0;
+
+    galil.openPin(this.pin);
+    galil.setPinDirection(this.pin, 'out');
+    galil.writePin(this.pin, '0');
+
+    console.log('[MQ3] Starting measurement');
+    var timer = 0;
+    var int_id = setInterval(function()
+    {
+        var current_value = parseInt(galil.readAnalogPin(that.pin));
+        higher_value = (higher_value > current_value) ? higher_value : current_value;
+
+        timer++;
+        if (timer > count)
+        {
+            galil.closePin(that.pin);
+            clearInterval(int_id);
+            console.log('[MQ3] Measurement done');
+            callback(higher_value);
+        }
+        console.log('[MQ3] ' + (count - timer) + ' left...');
+    }, interval);
+};
+
+/**
+ * Helper : Gets the lower measure value over time
+ *
+ * @method getHigherValue
+ * @param {Number} interval A measure is done every interval (ms)
+ * @param {Number} count Number of measures to do
+ * @param {Function} [callback] Callback. Lower value is passed to it.
+ */
+Mq3Controller.prototype.getLowerValue = function(interval, count, callback)
 {
     var that = this;
     var higher_value = 0;
