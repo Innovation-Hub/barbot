@@ -5,13 +5,12 @@ def closePin(pinNo, gpioType):
     ''' close pin the way it needs to be closed depending on type '''
     path = "/sys/class/"
     path += "pwm/pwmchip0/unexport" if gpioType == "PWM" else "gpio/unexport"
-    print path
     if os.path.exists("/sys/class/gpio/gpio" + str(pinNo)):
         os.system("echo " + str(pinNo) + " > " + path)
         if not os.path.exists("/sys/class/gpio/gpio" + str(pinNo)):
             return True
     else:
-        return False
+        return True
     return False
 
 
