@@ -3,6 +3,7 @@ var async = require('async');
 
 var bar = require('./pump-controller');
 var mq3 = require('./mq3-controller');
+var rgb = require('./rgbled-controller');
 
 var port = 4242;
 var express = require('express');
@@ -20,10 +21,6 @@ String.prototype.endsWith = function(suffix) {
 };
 
 var prepareDrink = function(ingredients, cb) {
-    mq3.getAverageValue(500, 10, function(avg_value)
-    {
-        console.log('[CB_AVG] ' + avg_value);
-
         async.eachSeries(ingredients, function (i, cb) {
             bar.drainIndex(i.index, i.time, function () {
                 cb(null);
@@ -31,7 +28,6 @@ var prepareDrink = function(ingredients, cb) {
         }, function (err, res) {
             cb(err);
         });
-    });
 };
 
 fs.readdir('./recipes/', function (err, files) {
