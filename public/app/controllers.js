@@ -4,7 +4,7 @@ function HomeCtrl($scope, $routeParams, $http)
 	$scope.recipes = [];
 	$scope.isBusy = false;
 	$scope.info = '';
-	$scope.alcohol = 0;
+	$scope.alcohol = '...';
 	
 	$http.get('/api/recipes').success(function(data, status)
     {
@@ -18,11 +18,7 @@ function HomeCtrl($scope, $routeParams, $http)
 
 	$scope.purge = function ()
 	{
-		$http.get('api/purge').success(function(data, status)
-			{
-				$scope.alcohol = data;
-				$scope.info = 'Smelling ' + data + ' % of alcohol !';
-			});
+		$http.get('api/purge').success();
 	}
 
 	/*document.getElementById("emergencyBtn").onclick = function()
@@ -42,7 +38,28 @@ function HomeCtrl($scope, $routeParams, $http)
 
 	$scope.drunk = function ()
 	{
-		$http.get('api/drunk').success();
+		$http.get('api/drunk').success(function(data, status)
+			{
+				console.log(data.drunk);
+				if (data.drunk < 400)
+				{
+					$scope.alcohol = "Nah, you're clean";
+				}
+				else if(data.drunk >= 400 && data.drunk <= 1000)
+				{
+					$scope.alcohol = "Just a little";
+				}
+				else if (data.drunk > 1000 && data.drunk <= 2500)
+				{
+					$scope.alcohol = "Drunk ;)";
+				}
+				else if (data.drunk > 2500)
+				{
+					$scope.alcohol = "Almost dead";
+				}
+
+
+			});
 	}
 
 	$scope.order = function (recipe)

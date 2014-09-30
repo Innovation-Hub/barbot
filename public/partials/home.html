@@ -10,7 +10,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Alcool-o-meter</div>
             <div class="panel-body">
-                Are you drunk yet ?
+                Are you drunk yet ? {{alcohol}}
             </div>
             <div class="panel-footer">
                 <a class="btn btn-start btn-sm" ng-disabled="isBusy" ng-click="drunk()" id="drunkBtn" role="button">Test it !</a>
@@ -21,7 +21,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{recipe.name}}</div>
             <div class="panel-body">
-                {{recipe.name}} need a description on the recipe file
+                {{recipe.name}}
             </div>
             <div class="panel-footer">
                 <a class="btn btn-start btn-sm" ng-disabled="isBusy" ng-click="order(recipe)" role="button">Order</a>
